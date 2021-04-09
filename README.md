@@ -1,6 +1,7 @@
 # akka-logback
 
 ![Build Status](https://github.com/armanbilge/akka-logback/workflows/Build/badge.svg)
+[![Maven Central](https://img.shields.io/maven-central/v/com.armanbilge/akka-logback_2.13.svg)](https://maven-badges.herokuapp.com/maven-central/com.armanbilge/akka-logback_2.13)
 
 akka-logback helps integrate [logback](https://logback.qos.ch/) with your [Akka](https://akka.io) applications.  Features:
 * Allows logback properties to be sourced from the Akka configuration
