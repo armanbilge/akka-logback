@@ -49,3 +49,4 @@ developers := List(
     url = url("https://github.com/armanbilge")
   )
 )
+sonatypeCredentialHost := "s01.oss.sonatype.org"
