@@ -147,7 +147,7 @@ class AkkaConfigurator extends ContextAwareBase with Configurator {
         throw new LogbackException(s"Unexpected filename extension of file [$url]. Should be .xml")
       case None =>
         throw new LogbackException(
-          s"Could not find ${logbackConfigFile.fold("")(f => s"[$f], ")}[logback-akka.xml] or [logback-akka.xml]"
+          s"Could not find ${logbackConfigFile.fold("")(f => s"[$f], ")}[logback-akka-test.xml] or [logback-akka.xml]"
         )
     }
   }
