@@ -1,0 +1,19 @@
+<configuration>
+
+    <akkaProperty name="AKKA_LOGLEVEL" path="akka.loglevel" />
+    <akkaProperty name="MY_AKKA_PROPERTY" path="my-app.my-setting" scope="context" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="MY_AKKA_APPENDER" class="com.armanbilge.akkalogback.MyAkkaAppender" />
+
+    <root level="${AKKA_LOGLEVEL}">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="MY_AKKA_APPENDER" />
+    </root>
+
+</configuration>
