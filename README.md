@@ -12,7 +12,7 @@ akka-logback helps integrate [logback](https://logback.qos.ch/) with your [Akka]
 The artifact is published to Maven Central.
 
 ```scala
-libraryDependencies += "com.armanbilge" %% "akka-logback" % "0.1.0"
+libraryDependencies += "com.armanbilge" %% "akka-logback" % "0.1.1"
 ```
 
 ## Usage
