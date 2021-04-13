@@ -54,6 +54,8 @@ Now you can source [logback properties](https://logback.qos.ch/manual/configurat
 
 See the [Akka documentation](https://doc.akka.io/docs/akka/current/typed/logging.html#logback) for guidance on configuring logback.
 
+**Caveat**: logging now depends on your actor system, so creating an actor system should be one of the first things that your app does (specifically, before obtaining a logger via SLF4J).
+
 ### Implementing Akka-based appenders
 
 To implement a logback appender that has access to the `ActorSystem`, add a setter method to your appender with the following signature.

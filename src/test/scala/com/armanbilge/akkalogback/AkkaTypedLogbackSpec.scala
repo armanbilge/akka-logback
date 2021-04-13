@@ -16,35 +16,30 @@
 
 package com.armanbilge.akkalogback
 
-import akka.actor.ActorSystem
-import akka.testkit.TestKit
+import akka.actor.typed.ActorSystem
+import akka.actor.typed.scaladsl.Behaviors
 import ch.qos.logback.classic.LoggerContext
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.matchers.should.Matchers
-import org.scalatest.wordspec.AnyWordSpecLike
+import org.scalatest.wordspec.AnyWordSpec
 import org.slf4j.{ Logger, LoggerFactory }
 
-class AkkaLogbackSpec
-    extends TestKit(ActorSystem("AkkaLogbackSpec"))
-    with AnyWordSpecLike
-    with Matchers
-    with BeforeAndAfterAll {
+// The addition of this spec is motivated by race conditions in Akka typed
+// where SLF4J (and thereby logback) may initialize before AkkaLogback registers
+// the ActorSystem with the AkkaConfigurator.
+// TODO Is there a way to reliably test for this race condition?
+class AkkaTypedLogbackSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll {
 
+  val system  = ActorSystem(Behaviors.ignore, "AkkaTypedLogbackSpec")
   val context = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
   val root    = context.getLogger(Logger.ROOT_LOGGER_NAME)
 
+  override def afterAll(): Unit = system.terminate()
+
   "AkkaLogback" should {
-    "have set akka.loglevel for the root logger" in {
-      root.getLevel.levelStr shouldEqual system.settings.LogLevel
-    }
-    "have put the Akka property in the context" in {
-      context.getProperty("MY_AKKA_PROPERTY") shouldEqual system.settings.config.getString(
-        "my-app.my-setting"
-      )
-    }
     "have set the ActorSystem on the appender" in {
       val myAppender = root.getAppender("MY_AKKA_APPENDER").asInstanceOf[MyAkkaAppender]
-      myAppender.actorSystem shouldEqual system
+      myAppender.actorSystem shouldEqual system.classicSystem
     }
   }
 }

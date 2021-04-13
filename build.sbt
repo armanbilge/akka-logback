@@ -16,6 +16,12 @@ Compile / scalafmt := {
   (Compile / scalafmt).value
 }
 
+Test / fork := true
+Test / testGrouping := (Test / definedTests).value.map { suite =>
+  import Tests._
+  Group(suite.name, Seq(suite), SubProcess(ForkOptions()))
+}
+
 addCommandAlias("codeStyleCheck", "headerCheck; scalafmtCheckAll; scalafmtSbtCheck")
 
 enablePlugins(GitVersioning)
@@ -23,11 +29,13 @@ enablePlugins(AutomateHeaderPlugin)
 
 val AkkaVersion = "2.6.14"
 libraryDependencies := Seq(
-  "ch.qos.logback"     % "logback-classic" % "1.2.3",
-  "com.typesafe.akka" %% "akka-actor"      % AkkaVersion,
-  "org.scalatest"     %% "scalatest"       % "3.2.7"     % Test,
-  "com.typesafe.akka" %% "akka-testkit"    % AkkaVersion % Test,
-  "com.typesafe.akka" %% "akka-slf4j"      % AkkaVersion % Test
+  "ch.qos.logback"     % "logback-classic"          % "1.2.3",
+  "com.typesafe.akka" %% "akka-actor"               % AkkaVersion,
+  "org.scalatest"     %% "scalatest"                % "3.2.7"     % Test,
+  "com.typesafe.akka" %% "akka-actor-typed"         % AkkaVersion % Test,
+  "com.typesafe.akka" %% "akka-actor-testkit-typed" % AkkaVersion % Test,
+  "com.typesafe.akka" %% "akka-testkit"             % AkkaVersion % Test,
+  "com.typesafe.akka" %% "akka-slf4j"               % AkkaVersion % Test
 )
 
 organization := "com.armanbilge"

@@ -30,16 +30,23 @@ import com.armanbilge.akkalogback.AkkaConfigurator.{
   TestAutoConfigFile,
   WellFormedUrl,
   checkResource,
-  checkResources
+  checkResources,
+  configurationTimeout,
+  registrationLatch
 }
+import com.typesafe.config.ConfigFactory
 
 import java.io.File
 import java.net.URL
+import java.util.concurrent.{ CountDownLatch, TimeUnit }
 import scala.annotation.nowarn
 import scala.collection.JavaConverters._
 import scala.util.{ Failure, Success, Try }
 
 object AkkaConfigurator {
+  private val configurationTimeout =
+    ConfigFactory.load().getDuration("akka-logback.configuration-timeout")
+  private val registrationLatch                            = new CountDownLatch(1)
   @volatile private var system: ClassicActorSystemProvider = _
 
   /**
@@ -47,9 +54,10 @@ object AkkaConfigurator {
     * This method can only be called once.
     */
   def registerActorSystem(system: ClassicActorSystemProvider): Unit =
-    if (this.system == null)
+    if (this.system == null) {
       this.system = system
-    else
+      registrationLatch.countDown()
+    } else
       throw new IllegalStateException("ActorSystem has been already registered")
 
   private val AutoConfigFile     = "logback-akka.xml"
@@ -122,6 +130,8 @@ object AkkaConfigurator {
 class AkkaConfigurator extends ContextAwareBase with Configurator {
 
   override def configure(loggerContext: LoggerContext): Unit = {
+    registrationLatch.await(configurationTimeout.toMillis, TimeUnit.MILLISECONDS)
+
     implicit val context = loggerContext
     implicit val loader  = getClass.getClassLoader
 
