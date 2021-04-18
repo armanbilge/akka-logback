@@ -2,8 +2,10 @@
 
 ![Build Status](https://github.com/armanbilge/akka-logback/workflows/Build/badge.svg)
 [![Maven Central](https://img.shields.io/maven-central/v/com.armanbilge/akka-logback_2.13.svg)](https://maven-badges.herokuapp.com/maven-central/com.armanbilge/akka-logback_2.13)
+[![Scala Steward badge](https://img.shields.io/badge/Scala_Steward-helping-blue.svg?style=flat&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAMAAAARSr4IAAAAVFBMVEUAAACHjojlOy5NWlrKzcYRKjGFjIbp293YycuLa3pYY2LSqql4f3pCUFTgSjNodYRmcXUsPD/NTTbjRS+2jomhgnzNc223cGvZS0HaSD0XLjbaSjElhIr+AAAAAXRSTlMAQObYZgAAAHlJREFUCNdNyosOwyAIhWHAQS1Vt7a77/3fcxxdmv0xwmckutAR1nkm4ggbyEcg/wWmlGLDAA3oL50xi6fk5ffZ3E2E3QfZDCcCN2YtbEWZt+Drc6u6rlqv7Uk0LdKqqr5rk2UCRXOk0vmQKGfc94nOJyQjouF9H/wCc9gECEYfONoAAAAASUVORK5CYII=)](https://scala-steward.org)
 
-akka-logback helps integrate [logback](https://logback.qos.ch/) with your [Akka](https://akka.io) applications.  Features:
+akka-logback helps integrate [logback](https://logback.qos.ch/) with your [Akka](https://akka.io) applications.
+Features:
 * Allows logback properties to be sourced from the Akka configuration
 * Provides logback appenders access to the actor system
 
@@ -12,7 +14,7 @@ akka-logback helps integrate [logback](https://logback.qos.ch/) with your [Akka]
 The artifact is published to Maven Central.
 
 ```scala
-libraryDependencies += "com.armanbilge" %% "akka-logback" % "0.1.1"
+libraryDependencies += "com.armanbilge" %% "akka-logback" % "0.1.1" % Runtime
 ```
 
 ## Usage
@@ -38,13 +40,13 @@ Now you can source [logback properties](https://logback.qos.ch/manual/configurat
 <configuration>
     <!-- Sets the variable `AKKA_LOGLEVEL` to the value of the `akka.loglevel` setting defined in the Akka configuration -->
     <akkaProperty name="AKKA_LOGLEVEL" path="akka.loglevel" />
-    
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
-    
+
     <!-- Sets the root logger level to the value of the `AKKA_LOGLEVEL` variable via substitution -->
     <root level="${AKKA_LOGLEVEL}">
         <appender-ref ref="STDOUT" />
