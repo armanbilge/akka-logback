@@ -1,5 +1,5 @@
 name := "akka-logback"
-scalaVersion := "2.13.5"
+scalaVersion := "2.13.6"
 crossScalaVersions := Seq(scalaVersion.value, "2.12.13")
 scalacOptions ++= Seq(
   "-unchecked",
