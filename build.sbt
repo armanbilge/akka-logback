@@ -29,7 +29,7 @@ enablePlugins(AutomateHeaderPlugin)
 
 val AkkaVersion = "2.6.15"
 libraryDependencies := Seq(
-  "ch.qos.logback"     % "logback-classic"          % "1.2.3",
+  "ch.qos.logback"     % "logback-classic"          % "1.2.4",
   "com.typesafe.akka" %% "akka-actor"               % AkkaVersion,
   "org.scalatest"     %% "scalatest"                % "3.2.9"     % Test,
   "com.typesafe.akka" %% "akka-actor-typed"         % AkkaVersion % Test,
