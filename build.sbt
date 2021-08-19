@@ -27,7 +27,7 @@ addCommandAlias("codeStyleCheck", "headerCheck; scalafmtCheckAll; scalafmtSbtChe
 enablePlugins(GitVersioning)
 enablePlugins(AutomateHeaderPlugin)
 
-val AkkaVersion = "2.6.15"
+val AkkaVersion = "2.6.16"
 libraryDependencies := Seq(
   "ch.qos.logback"     % "logback-classic"          % "1.2.5",
   "com.typesafe.akka" %% "akka-actor"               % AkkaVersion,
