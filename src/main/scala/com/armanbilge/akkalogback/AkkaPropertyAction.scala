@@ -24,8 +24,8 @@ import com.typesafe.config.Config
 import org.xml.sax.Attributes
 
 /**
-  * Logback [[ch.qos.logback.core.joran.action.Action]] to support `<akkaProperty>` tags.
-  * Allows logback properties to be sourced from the Akka config.
+  * Logback [[ch.qos.logback.core.joran.action.Action]] to support `<akkaProperty>` tags. Allows
+  * logback properties to be sourced from the Akka config.
   */
 class AkkaPropertyAction(config: Config) extends Action {
 

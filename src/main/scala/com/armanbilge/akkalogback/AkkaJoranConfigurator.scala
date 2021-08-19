@@ -21,9 +21,11 @@ import ch.qos.logback.classic.joran.JoranConfigurator
 import ch.qos.logback.core.joran.spi.{ ElementSelector, RuleStore }
 
 /**
-  * Extends logback's [[ch.qos.logback.classic.joran.JoranConfigurator]] with additional Akka-specific parsing rules:
-  *  1. [[ActorSystemAction]] for setting [[akka.actor.ActorSystem]] on an [[ch.qos.logback.core.Appender]]
-  *  1. [[AkkaPropertyAction]] for sourcing a logback property from the Akka configuration
+  * Extends logback's [[ch.qos.logback.classic.joran.JoranConfigurator]] with additional
+  * Akka-specific parsing rules:
+  *   1. [[ActorSystemAction]] for setting [[akka.actor.ActorSystem]] on an
+  *      [[ch.qos.logback.core.Appender]]
+  *   1. [[AkkaPropertyAction]] for sourcing a logback property from the Akka configuration
   */
 class AkkaJoranConfigurator(system: ClassicActorSystemProvider) extends JoranConfigurator {
 
