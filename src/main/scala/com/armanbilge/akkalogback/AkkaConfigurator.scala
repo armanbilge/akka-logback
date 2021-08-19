@@ -50,8 +50,8 @@ object AkkaConfigurator {
   @volatile private var system: ClassicActorSystemProvider = _
 
   /**
-    * Registers a [[akka.actor.ClassicActorSystemProvider]] with the [[AkkaConfigurator]].
-    * This method can only be called once.
+    * Registers a [[akka.actor.ClassicActorSystemProvider]] with the [[AkkaConfigurator]]. This
+    * method can only be called once.
     */
   def registerActorSystem(system: ClassicActorSystemProvider): Unit =
     if (this.system == null) {
@@ -120,12 +120,15 @@ object AkkaConfigurator {
 }
 
 /**
-  * Configures logback with the [[AkkaJoranConfigurator]] via the configuration file automatically resolved in the following priority:
-  *  1. as specified by the `akka-logback.configuration-file` config setting
-  *  1. `logback-akka-test.xml` found on the class path
-  *  1. `logback-akka.xml` found on the class path
+  * Configures logback with the [[AkkaJoranConfigurator]] via the configuration file automatically
+  * resolved in the following priority:
+  *   1. as specified by the `akka-logback.configuration-file` config setting
+  *   1. `logback-akka-test.xml` found on the class path
+  *   1. `logback-akka.xml` found on the class path
   *
-  * Instances of this class are typically instantiated by the [[ch.qos.logback.classic.util.ContextInitializer]] via [[https://docs.oracle.com/javase/tutorial/ext/basics/spi.html SPI]].
+  * Instances of this class are typically instantiated by the
+  * [[ch.qos.logback.classic.util.ContextInitializer]] via
+  * [[https://docs.oracle.com/javase/tutorial/ext/basics/spi.html SPI]].
   */
 class AkkaConfigurator extends ContextAwareBase with Configurator {
 

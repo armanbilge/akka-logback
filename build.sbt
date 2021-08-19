@@ -1,5 +1,5 @@
-name := "akka-logback"
-scalaVersion := "2.13.6"
+name               := "akka-logback"
+scalaVersion       := "2.13.6"
 crossScalaVersions := Seq(scalaVersion.value, "2.12.14")
 scalacOptions ++= Seq(
   "-unchecked",
@@ -38,11 +38,11 @@ libraryDependencies := Seq(
   "com.typesafe.akka" %% "akka-slf4j"               % AkkaVersion % Test
 )
 
-organization := "com.armanbilge"
+organization     := "com.armanbilge"
 organizationName := "Arman Bilge"
-startYear := Some(2021)
-licenses := Seq("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
-homepage := Some(url("https://github.com/armanbilge/akka-logback"))
+startYear        := Some(2021)
+licenses         := Seq("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
+homepage         := Some(url("https://github.com/armanbilge/akka-logback"))
 scmInfo := Some(
   ScmInfo(
     url("https://github.com/armanbilge/akka-logback"),
@@ -58,4 +58,4 @@ developers := List(
   )
 )
 sonatypeCredentialHost := "s01.oss.sonatype.org"
-sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
+sonatypeRepository     := "https://s01.oss.sonatype.org/service/local"
