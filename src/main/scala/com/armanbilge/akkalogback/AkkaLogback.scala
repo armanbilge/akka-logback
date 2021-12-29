@@ -23,10 +23,6 @@ import com.armanbilge.akkalogback.AkkaConfigurator.checkResource
 
 import scala.util.Try
 
-/**
-  * A fake (no-op) logger whose initialization is used to register the [[akka.actor.ActorSystem]]
-  * with [[AkkaConfigurator]].
-  */
 class AkkaLogback extends Actor {
 
   private val log = Logging(this)

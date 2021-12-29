@@ -23,10 +23,6 @@ import ch.qos.logback.core.joran.util.PropertySetter
 import ch.qos.logback.core.joran.util.beans.BeanDescriptionCache
 import org.xml.sax.Attributes
 
-/**
-  * Logback [[ch.qos.logback.core.joran.action.Action]] to set the [[akka.actor.ActorSystem]] for an
-  * [[ch.qos.logback.core.Appender]].
-  */
 class ActorSystemAction(system: ClassicActorSystemProvider, beanCache: BeanDescriptionCache)
     extends Action {
 
