@@ -1,20 +1,6 @@
 name               := "akka-logback"
-scalaVersion       := "2.13.6"
-crossScalaVersions := Seq(scalaVersion.value, "2.12.14")
-scalacOptions ++= Seq(
-  "-unchecked",
-  "-deprecation",
-  "-language:_",
-  "-encoding",
-  "UTF-8",
-  "-Ywarn-unused:imports",
-  "-target:jvm-1.8"
-)
-scalafmtOnCompile := true
-Compile / scalafmt := {
-  val _ = (Compile / scalafmtSbt).value
-  (Compile / scalafmt).value
-}
+ThisBuild / scalaVersion       := "2.13.6"
+ThisBuild / crossScalaVersions := Seq(scalaVersion.value, "2.12.14")
 
 Test / fork := true
 Test / testGrouping := (Test / definedTests).value.map { suite =>
@@ -22,10 +8,12 @@ Test / testGrouping := (Test / definedTests).value.map { suite =>
   Group(suite.name, Seq(suite), SubProcess(ForkOptions()))
 }
 
-addCommandAlias("codeStyleCheck", "headerCheck; scalafmtCheckAll; scalafmtSbtCheck")
+ThisBuild / tlBaseVersion := "0.1"
+enablePlugins(TypelevelCiReleasePlugin)
+ThisBuild / tlCiReleaseSnapshots := true
+ThisBuild / tlCiReleaseBranches := Seq("series/sbt-typelevel")
 
-enablePlugins(GitVersioning)
-enablePlugins(AutomateHeaderPlugin)
+ThisBuild / tlHashSnapshots := false
 
 val AkkaVersion = "2.6.16"
 libraryDependencies := Seq(
@@ -43,12 +31,6 @@ organizationName := "Arman Bilge"
 startYear        := Some(2021)
 licenses         := Seq("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
 homepage         := Some(url("https://github.com/armanbilge/akka-logback"))
-scmInfo := Some(
-  ScmInfo(
-    url("https://github.com/armanbilge/akka-logback"),
-    "git@github.com:armanbilge/akka-logback.git"
-  )
-)
 developers := List(
   Developer(
     id = "armanbilge",
@@ -57,5 +39,3 @@ developers := List(
     url = url("https://github.com/armanbilge")
   )
 )
-sonatypeCredentialHost := "s01.oss.sonatype.org"
-sonatypeRepository     := "https://s01.oss.sonatype.org/service/local"
