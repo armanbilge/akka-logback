@@ -1,6 +1,5 @@
 name               := "akka-logback"
-ThisBuild / scalaVersion       := "2.13.6"
-ThisBuild / crossScalaVersions := Seq(scalaVersion.value, "2.12.14")
+ThisBuild / crossScalaVersions := Seq("2.13.6", "2.12.14")
 
 Test / fork := true
 Test / testGrouping := (Test / definedTests).value.map { suite =>
