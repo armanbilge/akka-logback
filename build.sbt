@@ -14,6 +14,8 @@ ThisBuild / tlCiReleaseBranches := Seq("series/sbt-typelevel")
 
 ThisBuild / tlHashSnapshots := false
 
+tlVersionIntroduced := Some("0.1.2")
+
 val AkkaVersion = "2.6.16"
 libraryDependencies := Seq(
   "ch.qos.logback"     % "logback-classic"          % "1.2.5",
